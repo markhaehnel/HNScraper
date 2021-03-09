@@ -9,7 +9,15 @@
 import Foundation
 
 /// Model used by the HN Scraper to store avery data about a post.
-open class HNPost: Identifiable {
+open class HNPost: Identifiable, Hashable {
+    public static func == (lhs: HNPost, rhs: HNPost) -> Bool {
+        return (lhs.id == rhs.id)
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
     public enum PostType {
         case defaultType
         case askHN
