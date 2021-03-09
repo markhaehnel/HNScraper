@@ -29,13 +29,13 @@ open class BaseComment {
 
 open class HNComment: BaseComment, Identifiable, Hashable {
     public static func == (lhs: HNComment, rhs: HNComment) -> Bool {
-        return (lhs.id == rhs.id)
+        (lhs.id == rhs.id)
     }
-    
+
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    
+
     public convenience init() {
         self.init(level: 0, replyTo: nil)
     }
