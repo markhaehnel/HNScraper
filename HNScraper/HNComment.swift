@@ -27,7 +27,7 @@ open class BaseComment {
     }
 }
 
-open class HNComment: BaseComment {
+open class HNComment: BaseComment, Identifiable {
     public convenience init() {
         self.init(level: 0, replyTo: nil)
     }
