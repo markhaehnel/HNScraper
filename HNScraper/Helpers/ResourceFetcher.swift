@@ -6,12 +6,12 @@
 //  Copyright © 2017 Stéphane Sercu. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 
 
 /// Singleton implementation of a GET/POST request sender
-class RessourceFetcher {
+class ResourceFetcher {
     public typealias FetchCompletion = (_ data: Data?, _ error: RessourceFetchingError?) -> Void
     public typealias JsonFetchCompletion = (_ json: Dictionary<String, Any>?, _ error: RessourceFetchingError?) -> Void
     
@@ -52,7 +52,7 @@ class RessourceFetcher {
         
     }
     
-    static let shared = RessourceFetcher()
+    static let shared = ResourceFetcher()
     
     /// Fetches the ressource pointed by the specified url and passes it to the completionHandler
     func fetchData(urlString: String, completion: @escaping FetchCompletion, timeout: TimeInterval = 20) {
@@ -99,7 +99,7 @@ class RessourceFetcher {
             } else if data == nil {
                 completion(nil, .noData)
             } else {
-                guard let json = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any]
+                guard let json = try? (JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any])
                     else {
                         completion(nil, .parsingError)
                         return

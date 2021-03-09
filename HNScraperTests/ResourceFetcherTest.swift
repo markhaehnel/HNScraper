@@ -8,7 +8,7 @@
 
 import XCTest
 @testable import HNScraper
-class RessourceFetcherTest: XCTestCase {
+class ResourceFetcherTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -22,7 +22,7 @@ class RessourceFetcherTest: XCTestCase {
     
     func testGetJson() {
         let exp = expectation(description: "No error & valid parsed data")
-        RessourceFetcher.shared.getJson(url: "https://httpbin.org/headers") { (json, error) in
+        ResourceFetcher.shared.getJson(url: "https://httpbin.org/headers") { (json, error) in
             XCTAssertNil(error)
             XCTAssertNotNil(json)
             XCTAssertNotNil(json!["headers"] as? [String: String])
@@ -35,7 +35,7 @@ class RessourceFetcherTest: XCTestCase {
         let bodyData = "attr1=val1&attr2=val2".data(using: .utf8)
         let cookie = HTTPCookie(properties: [.value:"value", .name:"name", .domain:"httpbin.org", .path:"."])
         
-        RessourceFetcher.shared.post(urlString: "https://httpbin.org/post", data: bodyData!, cookies: [cookie!]) { (data, response, error) in
+        ResourceFetcher.shared.post(urlString: "https://httpbin.org/post", data: bodyData!, cookies: [cookie!]) { (data, response, error) in
             XCTAssertNil(error)
             XCTAssertNotNil(response)
             XCTAssertNotNil(data)
@@ -54,7 +54,7 @@ class RessourceFetcherTest: XCTestCase {
         let expWithoutCookie = expectation(description: "Get the post data back as response in json format")
         let expWithCookie = expectation(description: "Get the post data back as response in json format (containing a cookies field)")
         let cookie = HTTPCookie(properties: [.value:"value", .name:"name", .domain:"httpbin.org", .path:"."])
-        RessourceFetcher.shared.get(urlString: "https://httpbin.org/cookies", cookies: [cookie!]) { (data, response, error) in
+        ResourceFetcher.shared.get(urlString: "https://httpbin.org/cookies", cookies: [cookie!]) { (data, response, error) in
             XCTAssertNil(error)
             XCTAssertNotNil(response)
             XCTAssertNotNil(data)
@@ -63,7 +63,7 @@ class RessourceFetcherTest: XCTestCase {
             XCTAssertEqual(json!["cookies"] as! [String:String], ["name":"value"])
             expWithCookie.fulfill()
         }
-        RessourceFetcher.shared.get(urlString: "https://httpbin.org/cookies") { (data, response, error) in
+        ResourceFetcher.shared.get(urlString: "https://httpbin.org/cookies") { (data, response, error) in
             XCTAssertNil(error)
             XCTAssertNotNil(response)
             XCTAssertNotNil(data)
@@ -77,7 +77,7 @@ class RessourceFetcherTest: XCTestCase {
     
     func testBadGetRequest() {
         let exp = expectation(description: "Get a invalidURL error")
-        RessourceFetcher.shared.get(urlString: "where?") { (data, response, error) in
+        ResourceFetcher.shared.get(urlString: "where?") { (data, response, error) in
             XCTAssertEqual(error, .invalidURL)
             exp.fulfill()
         }

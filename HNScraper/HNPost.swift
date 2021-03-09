@@ -71,7 +71,7 @@ open class HNPost {
     public convenience init?(fromHtml html: String, withParsingConfig parseConfig: [String : Any]) {
         self.init()
         
-        var postsConfig: [String : Any]? = (parseConfig["Post"] != nil) ? parseConfig["Post"] as? [String : Any] : nil
+        let postsConfig: [String : Any]? = (parseConfig["Post"] != nil) ? parseConfig["Post"] as? [String : Any] : nil
         if postsConfig == nil {
             return nil
         }

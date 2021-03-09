@@ -82,7 +82,7 @@ public class HNScraper {
         case noSuchPost
         case unknown
         
-        init?(_ error: RessourceFetcher.RessourceFetchingError?) {
+        init?(_ error: ResourceFetcher.RessourceFetchingError?) {
             if error == nil {
                 return nil
             }
@@ -192,7 +192,7 @@ public class HNScraper {
      parameter when the download is completed
      */
     private func downloadHtmlPage(urlString: String, cookie: HTTPCookie? = nil, completion: @escaping ((String?, HNScraperError?) -> Void)) {
-        RessourceFetcher.shared.fetchData(urlString: urlString, completion: {(data, error) -> Void in
+        ResourceFetcher.shared.fetchData(urlString: urlString, completion: {(data, error) -> Void in
             if data == nil {
                 completion(nil, HNScraperError(error) ?? .noData)
             } else {
@@ -233,7 +233,7 @@ public class HNScraper {
         
         var postAr: [HNPost] = [] // stores the results
         var linkForMore: String? = nil // link to next page ofthe list
-        var postsConfig: [String : Any]? = (parseConfig != nil && parseConfig!["Post"] != nil) ? parseConfig!["Post"] as? [String : Any] : nil
+        let postsConfig: [String : Any]? = (parseConfig != nil && parseConfig!["Post"] != nil) ? parseConfig!["Post"] as? [String : Any] : nil
         var htmlComponents: Array<String> = []
         if postsConfig != nil && postsConfig!["CS"] != nil {
             htmlComponents = html!.components(separatedBy: postsConfig!["CS"] as! String)
@@ -312,7 +312,7 @@ public class HNScraper {
         if postsConfig == nil {
             return nil
         }
-        var linkConfig: [String : String]? = postsConfig!["LinkForMore"] as? [String: String]
+        let linkConfig: [String : String]? = postsConfig!["LinkForMore"] as? [String: String]
         if linkConfig == nil {
             return nil
         }
@@ -333,7 +333,7 @@ public class HNScraper {
         if postsConfig == nil {
             return nil
         }
-        var linkConfig: [String : String]? = postsConfig!["LinkForMore"] as? [String: String]
+        let linkConfig: [String : String]? = postsConfig!["LinkForMore"] as? [String: String]
         if linkConfig == nil {
             return nil
         }
@@ -443,7 +443,7 @@ public class HNScraper {
         
         
         // Set Up
-        var commentDict: [String : Any]? = (parseConfig != nil && parseConfig!["Comment"] != nil) ? parseConfig!["Comment"] as? [String: Any] : nil
+        let commentDict: [String : Any]? = (parseConfig != nil && parseConfig!["Comment"] != nil) ? parseConfig!["Comment"] as? [String: Any] : nil
         if (commentDict == nil) {
             completion(post, [], nil, .missingOrCorruptedConfigFile)
             return

@@ -33,7 +33,7 @@ open class HNUser {
     }
     
     public convenience init?(fromHtml html: String, withParsingConfig parseConfig: [String : Any]) {
-        var userDict: [String : Any]? = parseConfig["User"] != nil ? parseConfig["User"] as? [String: Any] : nil
+        let userDict: [String : Any]? = parseConfig["User"] != nil ? parseConfig["User"] as? [String: Any] : nil
         if (userDict == nil || userDict!["Parts"] == nil) {
             return nil
         }

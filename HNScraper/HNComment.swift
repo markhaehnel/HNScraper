@@ -56,7 +56,7 @@ open class HNComment: BaseComment {
     
     public convenience init?(fromHtml html: String, withParsingConfig parseConfig: [String : Any], levelOffset: Int = 0) {
         self.init()
-        var commentDict: [String : Any]? = parseConfig["Comment"] != nil ? parseConfig["Comment"] as? [String: Any] : nil
+        let commentDict: [String : Any]? = parseConfig["Comment"] != nil ? parseConfig["Comment"] as? [String: Any] : nil
         if commentDict == nil {
             return nil
         }
@@ -132,7 +132,7 @@ open class HNComment: BaseComment {
     
     public static func parseAskHNComment(html: String, withParsingConfig parseConfig: [String : Any]) -> HNComment? {
         var cDict: [String : Any] = [:]
-        var commentDict: [String : Any]? = parseConfig["Comment"] != nil ? parseConfig["Comment"] as? [String: Any] : nil
+        let commentDict: [String : Any]? = parseConfig["Comment"] != nil ? parseConfig["Comment"] as? [String: Any] : nil
         if commentDict == nil {
             return nil
         }
@@ -172,7 +172,7 @@ open class HNComment: BaseComment {
         return newComment
     }
     public static func parseJobComment(html: String, withParsingConfig parseConfig: [String : Any]) -> HNComment? {
-        var commentDict: [String : Any]? = parseConfig["Comment"] != nil ? parseConfig["Comment"] as? [String: Any] : nil
+        let commentDict: [String : Any]? = parseConfig["Comment"] != nil ? parseConfig["Comment"] as? [String: Any] : nil
         if commentDict == nil {
             return nil
         }

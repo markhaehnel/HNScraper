@@ -196,7 +196,7 @@ class HNScraperLoginNeededTest: XCTestCase {
             XCTAssertEqual(String(describing: user!.age!).prefix(7), "2010-08")
             XCTAssertNotEqual(user?.karma, 0)
             XCTAssertNotNil(user?.aboutInfo)
-            XCTAssertNotEqual(user!.aboutInfo!, "")
+            XCTAssertNotEqual(user?.aboutInfo!, "")
             exp.fulfill()
         })
         wait(for: [exp], timeout: HNScraperTest.defaultTimeOut)
