@@ -6,16 +6,14 @@
 //  Copyright © 2017 Stéphane Sercu. All rights reserved.
 //
 
-import XCTest
 @testable import HNScraper
+import XCTest
 
 class HNPostTest: XCTestCase {
-    
-    
     func testDefaultPostParsing() {
         // TODO: This tests nothing about upvoteURL, points,
         let exp = expectation(description: "All important field of HNPost are correctly parsed")
-        HNScraper.shared.getPost(ById: "15364896", buildHierarchy: false) { (post, comments, error) in
+        HNScraper.shared.getPost(ById: "15364896", buildHierarchy: false) { post, comments, error in
             XCTAssertNil(error)
             XCTAssertNotNil(post)
             XCTAssertEqual(post?.title, "Cloudflare Workers: Run JavaScript Service Workers at the Edge")
@@ -25,15 +23,15 @@ class HNPostTest: XCTestCase {
             XCTAssertGreaterThan(post!.commentCount, 0)
             XCTAssertEqual(post?.commentCount, comments.count)
             XCTAssertEqual(post?.type, .defaultType)
-            XCTAssertEqual(post?.url, URL(string:"https://blog.cloudflare.com/introducing-cloudflare-workers/"))
+            XCTAssertEqual(post?.url, URL(string: "https://blog.cloudflare.com/introducing-cloudflare-workers/"))
             exp.fulfill()
         }
         wait(for: [exp], timeout: HNScraperTest.defaultTimeOut)
     }
-    
+
     func testAskPostParsing() {
         let exp = expectation(description: "All important field of HNPost are correctly parsed")
-        HNScraper.shared.getPost(ById: "15361048", buildHierarchy: false) { (post, comments, error) in
+        HNScraper.shared.getPost(ById: "15361048", buildHierarchy: false) { post, comments, error in
             XCTAssertNil(error)
             XCTAssertNotNil(post)
             XCTAssertEqual(post?.title, "Ask HN: Library recommendations for a Client / Server project (all Java)")
@@ -43,20 +41,15 @@ class HNPostTest: XCTestCase {
             XCTAssertGreaterThan(post!.commentCount, 0)
             XCTAssertEqual(post?.commentCount, comments.count - 1) // The first comment is the Ask
             XCTAssertEqual(post?.type, .askHN)
-            XCTAssertEqual(post?.url, URL(string:"https://news.ycombinator.com/item?id=15361048"))
+            XCTAssertEqual(post?.url, URL(string: "https://news.ycombinator.com/item?id=15361048"))
             exp.fulfill()
         }
         wait(for: [exp], timeout: HNScraperTest.defaultTimeOut)
     }
-    
+
     // TODO: test noob users... but noob users change every time
-    
-    func testJobPostParsing() {
-        
-    }
-    
-    func testShowPostParsing() {
-        
-    }
-    
+
+    func testJobPostParsing() {}
+
+    func testShowPostParsing() {}
 }

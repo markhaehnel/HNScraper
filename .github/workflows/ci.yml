@@ -1,0 +1,27 @@
+name: CI
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install SwiftFormat
+        run: brew install swiftformat
+
+      - name: Lint code
+        run: swiftformat --lint .
+
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build app
+        run: xcodebuild -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" -scheme "Bonjwa"

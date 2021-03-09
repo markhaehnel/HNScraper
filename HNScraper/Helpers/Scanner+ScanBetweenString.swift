@@ -10,8 +10,8 @@ import Foundation
 extension Scanner {
     func scanBetweenString(stringA: String, stringB: String, into: AutoreleasingUnsafeMutablePointer<NSString?>?) {
         var trash: NSString? = ""
-        self.scanUpTo(stringA, into: &trash)
-        self.scanString(stringA, into: &trash)
-        self.scanUpTo(stringB, into: into)
+        scanUpTo(stringA, into: &trash)
+        scanString(stringA, into: &trash)
+        scanUpTo(stringB, into: into)
     }
 }
