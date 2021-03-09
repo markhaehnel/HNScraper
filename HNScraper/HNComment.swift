@@ -8,7 +8,8 @@
 
 import Foundation
 
-open class BaseComment {
+open class BaseComment: Identifiable, Hashable {
+    public var id: String! = ""
     public var replies: [BaseComment]! = []
     public var level: Int! = 0
     public weak var replyTo: BaseComment?
@@ -25,17 +26,17 @@ open class BaseComment {
     public func addReply(_ reply: BaseComment) {
         replies.append(reply)
     }
-}
-
-open class HNComment: BaseComment, Identifiable, Hashable {
-    public static func == (lhs: HNComment, rhs: HNComment) -> Bool {
+    
+    public static func == (lhs: BaseComment, rhs: BaseComment) -> Bool {
         (lhs.id == rhs.id)
     }
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
+}
 
+open class HNComment: BaseComment {
     public convenience init() {
         self.init(level: 0, replyTo: nil)
     }
@@ -52,7 +53,6 @@ open class HNComment: BaseComment, Identifiable, Hashable {
 
     public var type: HNCommentType! = .defaultType
     public var text: String! = ""
-    public var id: String! = ""
     public var username: String! = "anonymous"
     public var isOPNoob: Bool! = false
     public var parentId: String?
