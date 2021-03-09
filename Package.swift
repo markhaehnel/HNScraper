@@ -7,7 +7,8 @@ let package = Package(
     name: "HNScraper",
     platforms: [.macOS(.v10_12),
                 .iOS(.v10),
-                .tvOS(.v10)],
+                .tvOS(.v10),
+                .watchOS(.v3)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -25,12 +26,14 @@ let package = Package(
         .target(
             name: "HNScraper",
             dependencies: [],
-            path: "HNScraper"
+            path: "HNScraper",
+            exclude: ["Info.plist"]
         ),
         .testTarget(
             name: "HNScraperTests",
             dependencies: ["HNScraper"],
-            path: "HNScraperTests"
+            path: "HNScraperTests",
+            exclude: ["Info.plist"]
         ),
     ]
 )

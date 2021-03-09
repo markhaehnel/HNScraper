@@ -23,5 +23,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Build app
-        run: xcodebuild -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" -scheme "Bonjwa"
+      - name: Build library
+        run: swift build
+
+  test:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Test library
+        run: swift test

@@ -39,7 +39,7 @@ class ResourceFetcherTest: XCTestCase {
             XCTAssertNil(error)
             XCTAssertNotNil(response)
             XCTAssertNotNil(data)
-            let json: [String: Any]? = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any]
+            let json: [String: Any]? = try? (JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any])
             XCTAssertNotNil(json ?? nil)
             XCTAssertEqual((json!["form"] as! [String: String])["attr1"], "val1")
             XCTAssertEqual((json!["form"] as! [String: String])["attr2"], "val2")
@@ -57,7 +57,7 @@ class ResourceFetcherTest: XCTestCase {
             XCTAssertNil(error)
             XCTAssertNotNil(response)
             XCTAssertNotNil(data)
-            let json: [String: Any]? = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any]
+            let json: [String: Any]? = try? (JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any])
             XCTAssertNotNil(json ?? nil)
             XCTAssertEqual(json!["cookies"] as! [String: String], ["name": "value"])
             expWithCookie.fulfill()
@@ -66,7 +66,7 @@ class ResourceFetcherTest: XCTestCase {
             XCTAssertNil(error)
             XCTAssertNotNil(response)
             XCTAssertNotNil(data)
-            let json: [String: Any]? = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any]
+            let json: [String: Any]? = try? (JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any])
             XCTAssertNotNil(json ?? nil)
             expWithoutCookie.fulfill()
         }
