@@ -334,21 +334,21 @@ class HNScraperTest: XCTestCase {
      } */
 
     // TODO: Fix this test
-    /*func testUpvoteWithoutLogin() {
-        let exp = expectation(description: "get notLoggedIn error")
-        HNScraper.shared.getPostsList(page: .news, completion: { (posts, _, error) -> Void in
-            if posts.count == 0 {
-                XCTFail("The getPostLists method is probably broken. Or the hackernews is down...")
-                exp.fulfill()
-            }
-            let postToUpvote = posts[0] // first post of the home page
-            HNScraper.shared.upvote(Post: postToUpvote, completion: { (error) -> Void in
-                XCTAssertEqual(error, .notLoggedIn)
-                exp.fulfill()
-            })
-        })
-        wait(for: [exp], timeout: HNScraperTest.defaultTimeOut)
-    }*/
+    /* func testUpvoteWithoutLogin() {
+         let exp = expectation(description: "get notLoggedIn error")
+         HNScraper.shared.getPostsList(page: .news, completion: { (posts, _, error) -> Void in
+             if posts.count == 0 {
+                 XCTFail("The getPostLists method is probably broken. Or the hackernews is down...")
+                 exp.fulfill()
+             }
+             let postToUpvote = posts[0] // first post of the home page
+             HNScraper.shared.upvote(Post: postToUpvote, completion: { (error) -> Void in
+                 XCTAssertEqual(error, .notLoggedIn)
+                 exp.fulfill()
+             })
+         })
+         wait(for: [exp], timeout: HNScraperTest.defaultTimeOut)
+     } */
 
     func testGetCommentForValidPostId() {
         let exp = expectation(description: "Get some comments")
